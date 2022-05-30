@@ -6,32 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <SeekBar
+    <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/seekbarLampu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="200dp"
-        android:elevation="20dp"
         android:padding="6dp"
-        android:progressDrawable="@drawable/seekbar_background"
         android:thumb="@drawable/thumb"
         android:thumbOffset="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:stateListAnimator="@null"
+        android:elevation="5dp"
+        android:translationZ="5dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLampu"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="200dp"
-        android:background="@drawable/button_corner"
 
+        android:background="@drawable/button_corner"
+        android:stateListAnimator="@null"
+        android:elevation="5dp"
+        android:translationZ="5dp"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/my_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/button_corner"
+        android:backgroundTint="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLampu"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLampu"
+        app:layout_constraintStart_toStartOf="@+id/buttonLampu"
+        app:layout_constraintTop_toTopOf="@+id/buttonLampu"
+        android:visibility="invisible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

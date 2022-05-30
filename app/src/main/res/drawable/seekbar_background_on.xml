@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:gravity="center_vertical">
-        <shape android:shape="rectangle">
+    <item android:gravity="center">
+        <shape android:shape="rectangle"
+            android:useLevel="true">
             <solid android:color="#00FFFFFF"/>
             <size android:height="100dp"/>
             <corners android:radius="20dp"/>
@@ -11,17 +12,17 @@
         </shape>
     </item>
 
-    <item android:gravity="center_vertical">
+    <item android:gravity="center">
         <scale android:scaleWidth="100%">
             <selector>
                 <item>
-                    <shape android:shape="rectangle">
+                    <shape android:shape="rectangle"
+                        android:useLevel="true">
                         <gradient
                             android:startColor="#2196F3"
                             android:endColor="#3F51B5"/>
                         <size android:height="100dp"/>
                         <corners android:radius="20dp"/>
-
                     </shape>
                 </item>
             </selector>

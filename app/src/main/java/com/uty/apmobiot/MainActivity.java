@@ -2,20 +2,17 @@ package com.uty.apmobiot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import android.animation.Animator;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.BlendMode;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -35,9 +32,11 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    ConstraintLayout layout;
+
     SeekBar seekbarLampu;
     Button button;
-    Drawable draw, drawseekBarLampu, seekBarOn, seekBarOff;
+    Drawable draw, drawseekBarLampu, seekBarOn, seekBarOff, drawBackground;
     boolean state = false;
     int nilai = 0;
     DatabaseReference dref;
@@ -53,10 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
         seekBarOn = ContextCompat.getDrawable(this, R.drawable.seekbar_background_on);
         seekBarOff = ContextCompat.getDrawable(this, R.drawable.seekbar_background_off);
+
         button = findViewById(R.id.buttonLampu);
         seekbarLampu = findViewById(R.id.seekbarLampu);
 
         seekbarLampu.setProgressDrawable(seekBarOn);
+
+        layout = findViewById(R.id.backgroundUtama);
+        drawBackground = layout.getBackground();
+        drawBackground = DrawableCompat.wrap(drawBackground);
 
         draw = button.getBackground();
         draw = DrawableCompat.wrap(draw);
@@ -77,23 +81,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         seekbarLampu.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-                                                    @Override
-                                                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                                                    }
+        }
 
-                                                    @Override
-                                                    public void onStartTrackingTouch(SeekBar seekBar) {
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
 
-                                                    }
+        }
 
-                                                    @Override
-                                                    public void onStopTrackingTouch(SeekBar seekBar) {
-                                                        int kecerahan = seekBar.getProgress();
-                                                        pushKecerahanLampu(daoKecerahanLampu, dataKecerahanLampu(kecerahan));
-                                                        kecerahan(kecerahan);
-                                                    }
-                                                }
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            int kecerahan = seekBar.getProgress();
+            pushKecerahanLampu(daoKecerahanLampu, dataKecerahanLampu(kecerahan));
+            kecerahan(kecerahan);
+        }
+    }
         );
 
 
@@ -139,15 +143,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void kondisi(Boolean state){
+
         if(state){
             Log.d("aaa", "bb");
             DrawableCompat.setTint(draw, Color.BLUE);
+
+            DrawableCompat.setTint(drawBackground, ContextCompat.getColor(this, R.color.teal_200));
             seekbarLampu.setProgressTintList(null);
             seekbarLampu.setThumbTintList(null);
         }
         else{
             Log.d("cccc", "ddd");
             DrawableCompat.setTint(draw, Color.GRAY);
+            DrawableCompat.setTint(drawBackground, ContextCompat.getColor(this, R.color.TurnOff));
             seekbarLampu.setProgressTintList(ColorStateList.valueOf(Color.GRAY));
             seekbarLampu.setThumbTintList(ColorStateList.valueOf(Color.DKGRAY));
         }
@@ -162,9 +170,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void pushKondisiLampu(DAOkondisiLampu dao, kondisiLampu kond){
         dao.add(kond).addOnSuccessListener(
-                        suc -> Toast.makeText(this, "Berhasil masukkan Data kondisi", Toast.LENGTH_SHORT).show())
+                suc -> Toast.makeText(this, "Berhasil masukkan Data kondisi", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(
-                        fail -> Toast.makeText(this, "Gagal masukkan Data kondisi", Toast.LENGTH_SHORT).show());
+                fail -> Toast.makeText(this, "Gagal masukkan Data kondisi", Toast.LENGTH_SHORT).show());
     }
 
     private kecerahanLampu dataKecerahanLampu(int kecerahan){
@@ -173,9 +181,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void pushKecerahanLampu(DAOkecerahanLampu dao, kecerahanLampu kecer){
         dao.add(kecer).addOnSuccessListener(
-                        suc -> Toast.makeText(this, "Berhasil masukkan Data kecerahan", Toast.LENGTH_SHORT).show())
+                suc -> Toast.makeText(this, "Berhasil masukkan Data kecerahan", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(
-                        fail -> Toast.makeText(this, "Gagal masukkan Data kecerahan", Toast.LENGTH_SHORT).show());
+                fail -> Toast.makeText(this, "Gagal masukkan Data kecerahan", Toast.LENGTH_SHORT).show());
     }
 
     private void ambilDataKecerahan(){

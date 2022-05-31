@@ -10,6 +10,6 @@
     <color name="dark">#040404</color>
 
     <color name="TurnOn">#FFEB3B</color>
-    <color name="TurnOff">#121212</color>
+    <color name="TurnOff">#2B2825</color>
     <color name="gray">#AAA8A8</color>
 </resources>

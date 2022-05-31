@@ -81,23 +81,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         seekbarLampu.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                                                    @Override
+                                                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        }
+                                                    }
 
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
+                                                    @Override
+                                                    public void onStartTrackingTouch(SeekBar seekBar) {
 
-        }
+                                                    }
 
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            int kecerahan = seekBar.getProgress();
-            pushKecerahanLampu(daoKecerahanLampu, dataKecerahanLampu(kecerahan));
-            kecerahan(kecerahan);
-        }
-    }
+                                                    @Override
+                                                    public void onStopTrackingTouch(SeekBar seekBar) {
+                                                        int kecerahan = seekBar.getProgress();
+                                                        pushKecerahanLampu(daoKecerahanLampu, dataKecerahanLampu(kecerahan));
+                                                        kecerahan(kecerahan);
+                                                    }
+                                                }
         );
 
 
@@ -170,9 +170,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void pushKondisiLampu(DAOkondisiLampu dao, kondisiLampu kond){
         dao.add(kond).addOnSuccessListener(
-                suc -> Toast.makeText(this, "Berhasil masukkan Data kondisi", Toast.LENGTH_SHORT).show())
+                        suc -> Toast.makeText(this, "Berhasil masukkan Data kondisi", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(
-                fail -> Toast.makeText(this, "Gagal masukkan Data kondisi", Toast.LENGTH_SHORT).show());
+                        fail -> Toast.makeText(this, "Gagal masukkan Data kondisi", Toast.LENGTH_SHORT).show());
     }
 
     private kecerahanLampu dataKecerahanLampu(int kecerahan){
@@ -181,9 +181,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void pushKecerahanLampu(DAOkecerahanLampu dao, kecerahanLampu kecer){
         dao.add(kecer).addOnSuccessListener(
-                suc -> Toast.makeText(this, "Berhasil masukkan Data kecerahan", Toast.LENGTH_SHORT).show())
+                        suc -> Toast.makeText(this, "Berhasil masukkan Data kecerahan", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(
-                fail -> Toast.makeText(this, "Gagal masukkan Data kecerahan", Toast.LENGTH_SHORT).show());
+                        fail -> Toast.makeText(this, "Gagal masukkan Data kecerahan", Toast.LENGTH_SHORT).show());
     }
 
     private void ambilDataKecerahan(){

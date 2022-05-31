@@ -1,11 +1,13 @@
 package com.uty.apmobiot;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.animation.Animator;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -18,6 +20,11 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uty.apmobiot.lampuKondisi.DAOkondisiLampu;
 import com.uty.apmobiot.lampuKondisi.kondisiLampu;
 
@@ -30,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     Drawable draw, drawseekBarLampu, seekBarOn, seekBarOff;
     boolean state = false;
+    int nilai = 0;
+    DatabaseReference dref;
+
+    public static final String SHARED_PREFS = "sharedPref";
+    public static final String buttonLampu = "KondisiButton";
+    public static final String nilaiLampu = "nilaiLampu";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +64,13 @@ public class MainActivity extends AppCompatActivity {
 
         DAOkondisiLampu daoKondisiLampu = new DAOkondisiLampu();
         DAOkecerahanLampu daoKecerahanLampu = new DAOkecerahanLampu();
+
+        loadData();
         //pertama kali si lampu bakalan mati
         kondisi(state);
+        seekbarLampu.setProgress(nilai);
+        ambilDataKecerahan();
+        ambilDataKondisi();
 
 
 
@@ -70,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 int kecerahan = seekBar.getProgress();
                 pushKecerahanLampu(daoKecerahanLampu, dataKecerahanLampu(kecerahan));
-                Log.d("onProgressChanged", Integer.toString(kecerahan));
+                kecerahan(kecerahan);
             }
         }
         );
@@ -86,6 +105,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void saveDataKondisi(Boolean state) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(buttonLampu, state);
+        Log.d("simpan", "Berhasil simpan");
+        Log.d("simpan", Boolean.toString(state));
+        editor.apply();
+    }
+
+    private void saveDataKecerahan(int kecerahan) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(nilaiLampu, kecerahan);
+        Log.d("simpan", "Berhasil simpan");
+        Log.d("simpan", Integer.toString(kecerahan));
+        editor.apply();
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        state = sharedPreferences.getBoolean(buttonLampu, false);
+        nilai = sharedPreferences.getInt(nilaiLampu, 0);
+        Log.d("load", Boolean.toString(state));
+    }
+
+    private void kecerahan(int kecerahan){
+        seekbarLampu.setProgress(kecerahan);
+        saveDataKecerahan(kecerahan);
+        Log.d("onProgressChanged", Integer.toString(kecerahan));
+
+    }
+
+
     private void kondisi(Boolean state){
         if(state){
             Log.d("aaa", "bb");
@@ -99,8 +152,9 @@ public class MainActivity extends AppCompatActivity {
             seekbarLampu.setProgressTintList(ColorStateList.valueOf(Color.GRAY));
             seekbarLampu.setThumbTintList(ColorStateList.valueOf(Color.DKGRAY));
         }
+        saveDataKondisi(state);
         button.setSelected(!state);
-        seekbarLampu.setEnabled(!seekbarLampu.isEnabled());
+        seekbarLampu.setEnabled(state);
     }
 
     private kondisiLampu dataKondisiLampu(Boolean state){
@@ -126,6 +180,41 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Berhasil masukkan Data kecerahan", Toast.LENGTH_SHORT).show();
         }).addOnFailureListener(fail ->{
             Toast.makeText(this, "Gagal masukkan Data kecerahan", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void ambilDataKecerahan(){
+        dref = FirebaseDatabase.getInstance().getReference();
+        dref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String aa = snapshot.child("/kecerahanLampu/kecerahan").getValue().toString();
+                int value = Integer.parseInt(aa);
+                Log.d("aa", aa);
+                kecerahan(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void ambilDataKondisi() {
+        dref = FirebaseDatabase.getInstance().getReference();
+        dref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String aa = snapshot.child("/kondisiLampu/kondisi").getValue().toString();
+                boolean kond = Boolean.parseBoolean(aa);
+                kondisi(kond);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 }

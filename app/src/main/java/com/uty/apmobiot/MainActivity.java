@@ -31,6 +31,8 @@ import com.uty.apmobiot.lampuKondisi.kondisiLampu;
 import com.uty.apmobiot.lampuKecerahan.DAOkecerahanLampu;
 import com.uty.apmobiot.lampuKecerahan.kecerahanLampu;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     SeekBar seekbarLampu;
@@ -75,34 +77,31 @@ public class MainActivity extends AppCompatActivity {
 
 
         seekbarLampu.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                                                    @Override
+                                                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-            }
+                                                    }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+                                                    @Override
+                                                    public void onStartTrackingTouch(SeekBar seekBar) {
 
-            }
+                                                    }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int kecerahan = seekBar.getProgress();
-                pushKecerahanLampu(daoKecerahanLampu, dataKecerahanLampu(kecerahan));
-                kecerahan(kecerahan);
-            }
-        }
+                                                    @Override
+                                                    public void onStopTrackingTouch(SeekBar seekBar) {
+                                                        int kecerahan = seekBar.getProgress();
+                                                        pushKecerahanLampu(daoKecerahanLampu, dataKecerahanLampu(kecerahan));
+                                                        kecerahan(kecerahan);
+                                                    }
+                                                }
         );
 
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                state = button.isSelected();
-                pushKondisiLampu(daoKondisiLampu, dataKondisiLampu(state));
-                kondisi(state);
-            }
+        button.setOnClickListener(v -> {
+            state = button.isSelected();
+            pushKondisiLampu(daoKondisiLampu, dataKondisiLampu(state));
+            kondisi(state);
         });
     }
 
@@ -158,29 +157,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private kondisiLampu dataKondisiLampu(Boolean state){
-        kondisiLampu kond = new kondisiLampu(state);
-        return kond;
+        return new kondisiLampu(state);
     }
 
     private void pushKondisiLampu(DAOkondisiLampu dao, kondisiLampu kond){
-        dao.add(kond).addOnSuccessListener(suc ->{
-            Toast.makeText(this, "Berhasil masukkan Data kondisi", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(fail ->{
-            Toast.makeText(this, "Gagal masukkan Data kondisi", Toast.LENGTH_SHORT).show();
-        });
+        dao.add(kond).addOnSuccessListener(
+                        suc -> Toast.makeText(this, "Berhasil masukkan Data kondisi", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(
+                        fail -> Toast.makeText(this, "Gagal masukkan Data kondisi", Toast.LENGTH_SHORT).show());
     }
 
     private kecerahanLampu dataKecerahanLampu(int kecerahan){
-        kecerahanLampu kecer = new kecerahanLampu(kecerahan);
-        return kecer;
+        return new kecerahanLampu(kecerahan);
     }
 
     private void pushKecerahanLampu(DAOkecerahanLampu dao, kecerahanLampu kecer){
-        dao.add(kecer).addOnSuccessListener(suc ->{
-            Toast.makeText(this, "Berhasil masukkan Data kecerahan", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(fail ->{
-            Toast.makeText(this, "Gagal masukkan Data kecerahan", Toast.LENGTH_SHORT).show();
-        });
+        dao.add(kecer).addOnSuccessListener(
+                        suc -> Toast.makeText(this, "Berhasil masukkan Data kecerahan", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(
+                        fail -> Toast.makeText(this, "Gagal masukkan Data kecerahan", Toast.LENGTH_SHORT).show());
     }
 
     private void ambilDataKecerahan(){
@@ -188,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         dref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String aa = snapshot.child("/kecerahanLampu/kecerahan").getValue().toString();
+                String aa = Objects.requireNonNull(snapshot.child("/kecerahanLampu/kecerahan").getValue()).toString();
                 int value = Integer.parseInt(aa);
                 Log.d("aa", aa);
                 kecerahan(value);
@@ -206,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         dref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String aa = snapshot.child("/kondisiLampu/kondisi").getValue().toString();
+                String aa = Objects.requireNonNull(snapshot.child("/kondisiLampu/kondisi").getValue()).toString();
                 boolean kond = Boolean.parseBoolean(aa);
                 kondisi(kond);
             }

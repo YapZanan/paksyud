@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "581196286676",
+    "firebase_url": "https://apmobiot-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    "project_id": "apmobiot",
+    "storage_bucket": "apmobiot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581196286676:android:e4165ecf625219e2d74941",
+        "android_client_info": {
+          "package_name": "com.uty.apmobiot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581196286676-7rf0usv8tm0id12dli26t1f0u65m168j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3E8bZVuXoXSJL1ifAku86UPRbg-K_7MM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581196286676-7rf0usv8tm0id12dli26t1f0u65m168j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

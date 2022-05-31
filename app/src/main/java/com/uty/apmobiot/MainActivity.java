@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Context;
 import com.uty.apmobiot.lampuKondisi.DAOkondisiLampu;
 import com.uty.apmobiot.lampuKondisi.kondisiLampu;
 
@@ -192,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String aa = Objects.requireNonNull(snapshot.child("/kecerahanLampu/kecerahan").getValue()).toString();
+                Toast.makeText(getApplicationContext(), "Berhasil Update Data kecerahan", Toast.LENGTH_SHORT).show();
                 int value = Integer.parseInt(aa);
                 Log.d("aa", aa);
                 kecerahan(value);
@@ -210,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String aa = Objects.requireNonNull(snapshot.child("/kondisiLampu/kondisi").getValue()).toString();
+                Toast.makeText(getApplicationContext(), "Berhasil Update Data kondisi", Toast.LENGTH_SHORT).show();
                 boolean kond = Boolean.parseBoolean(aa);
                 kondisi(kond);
             }

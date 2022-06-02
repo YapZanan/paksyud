@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +35,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     ConstraintLayout layout;
+    TextView textStatus;
 
     SeekBar seekbarLampu;
     Button button;
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         if(state){
             Log.d("aaa", "bb");
             DrawableCompat.setTint(draw, Color.BLUE);
-
+            textStatus.setText("Nyala");
             DrawableCompat.setTint(drawBackground, ContextCompat.getColor(this, R.color.teal_200));
             seekbarLampu.setProgressTintList(null);
             seekbarLampu.setThumbTintList(null);
@@ -156,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             Log.d("cccc", "ddd");
             DrawableCompat.setTint(draw, Color.GRAY);
+            textStatus.setText("Nyala");
             DrawableCompat.setTint(drawBackground, ContextCompat.getColor(this, R.color.TurnOff));
             seekbarLampu.setProgressTintList(ColorStateList.valueOf(Color.GRAY));
             seekbarLampu.setThumbTintList(ColorStateList.valueOf(Color.DKGRAY));

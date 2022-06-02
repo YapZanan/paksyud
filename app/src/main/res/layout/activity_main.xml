@@ -43,5 +43,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
 
+    <TextView
+        android:id="@+id/textViewStatus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="30dp"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLampu"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLampu"
+        app:layout_constraintStart_toStartOf="@+id/buttonLampu"
+        app:layout_constraintTop_toTopOf="@+id/buttonLampu" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

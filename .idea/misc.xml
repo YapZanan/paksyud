@@ -22,6 +22,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ryzen/AndroidStudioProjects/apmobiot/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Ryzen/AndroidStudioProjects/apmobiot/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/apmobiot/app/src/main/res/drawable/button_corner.xml" value="0.278" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/apmobiot/app/src/main/res/drawable/change_state.xml" value="0.278" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/apmobiot/app/src/main/res/drawable/seekbar_background.xml" value="0.178" />

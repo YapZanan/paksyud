@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.buttonLampu);
         seekbarLampu = findViewById(R.id.seekbarLampu);
 
+        textStatus = findViewById(R.id.textViewStatus);
+
         seekbarLampu.setProgressDrawable(seekBarOn);
 
         layout = findViewById(R.id.backgroundUtama);
@@ -151,14 +153,14 @@ public class MainActivity extends AppCompatActivity {
             Log.d("aaa", "bb");
             DrawableCompat.setTint(draw, Color.BLUE);
             textStatus.setText("Nyala");
-            DrawableCompat.setTint(drawBackground, ContextCompat.getColor(this, R.color.teal_200));
+            DrawableCompat.setTint(drawBackground, ContextCompat.getColor(this, R.color.teal_700));
             seekbarLampu.setProgressTintList(null);
             seekbarLampu.setThumbTintList(null);
         }
         else{
             Log.d("cccc", "ddd");
             DrawableCompat.setTint(draw, Color.GRAY);
-            textStatus.setText("Nyala");
+            textStatus.setText("Mati");
             DrawableCompat.setTint(drawBackground, ContextCompat.getColor(this, R.color.TurnOff));
             seekbarLampu.setProgressTintList(ColorStateList.valueOf(Color.GRAY));
             seekbarLampu.setThumbTintList(ColorStateList.valueOf(Color.DKGRAY));

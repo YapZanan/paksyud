@@ -17,6 +17,8 @@
         android:layout_marginBottom="32dp"
         android:elevation="5dp"
         android:padding="6dp"
+        android:min="0"
+        android:max="255"
         android:stateListAnimator="@null"
         android:thumb="@drawable/thumb"
         android:thumbOffset="5dp"

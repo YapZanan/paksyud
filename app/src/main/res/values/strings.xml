@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">apmobiot</string>
     <string name="buttonLampuDeskripsi">button Lampu</string>
+    <string name="kecepatan">TextView</string>
 </resources>

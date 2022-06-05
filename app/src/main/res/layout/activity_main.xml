@@ -12,35 +12,39 @@
         android:id="@+id/seekbarLampu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:padding="6dp"
-        android:thumb="@drawable/thumb"
-        android:thumbOffset="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:stateListAnimator="@null"
+        android:layout_marginBottom="32dp"
         android:elevation="5dp"
-        android:translationZ="5dp"/>
+        android:padding="6dp"
+        android:stateListAnimator="@null"
+        android:thumb="@drawable/thumb"
+        android:thumbOffset="5dp"
+        android:translationZ="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchOtomatis"
+        app:layout_constraintVertical_bias="0.49" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLampu"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="200dp"
 
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_corner"
         android:contentDescription="@string/buttonLampuDeskripsi"
         android:elevation="5dp"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:stateListAnimator="@null"
         android:translationZ="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/switchOtomatis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewKecepatan"
         tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
 
     <TextView
@@ -55,6 +59,40 @@
         app:layout_constraintEnd_toEndOf="@+id/buttonLampu"
         app:layout_constraintStart_toStartOf="@+id/buttonLampu"
         app:layout_constraintTop_toTopOf="@+id/buttonLampu" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchOtomatis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:textSize="20sp"
+        android:thumb="@drawable/custom_thumb"
+        app:layout_constraintBottom_toTopOf="@+id/seekbarLampu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLampu"
+        app:showText="true"
+        app:track="@drawable/custom_track" />
+
+    <TextView
+        android:id="@+id/textViewKecepatan"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/kecepatan"
+        android:textSize="35sp"
+        android:textColor="@color/black"
+        android:background="@drawable/button_corner"
+        android:backgroundTint="@color/purple_200"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLampu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:gravity="center_horizontal"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

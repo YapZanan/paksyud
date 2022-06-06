@@ -1,4 +1,4 @@
-package com.uty.apmobiot;
+package com.uty.paksuyud;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
